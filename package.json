@@ -8,7 +8,11 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "lint:fix": "eslint . --fix",
-    "format-check": "prettier --check ."
+    "format-check": "prettier --check .",
+    "db:push": "drizzle-kit db:push",
+    "db:studio": "drizzle-kit db:studio",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "repository": {
     "type": "git",
@@ -23,11 +27,14 @@
   },
   "homepage": "https://github.com/Prabhatvrma1/aquisitions#readme",
   "dependencies": {
+    "@neondatabase/serverless": "^1.1.0",
     "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "express": "^5.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.1",
+    "drizzle-kit": "^0.31.10",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
