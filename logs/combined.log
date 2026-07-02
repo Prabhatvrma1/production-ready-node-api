@@ -8,3 +8,16 @@
 {"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:07:32:50 +0000] \"GET /health HTTP/1.1\" 200 73 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T07:32:50.330Z"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:07:53:08 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T07:53:08.347Z"}
 {"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:09:49:08 +0000] \"GET /api/auth/sign-up HTTP/1.1\" 404 155 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T09:49:08.010Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:34:53 +0000] \"GET /health HTTP/1.1\" 200 75 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:34:53.849Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:35:07 +0000] \"GET /api/auth/sign-up HTTP/1.1\" 404 155 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:35:07.628Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:35:13 +0000] \"GET /api/sign-up HTTP/1.1\" 404 150 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:35:13.169Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:35:14 +0000] \"GET /api/sign-up HTTP/1.1\" 404 150 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:35:14.190Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:35:14 +0000] \"GET /api/sign-up HTTP/1.1\" 404 150 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:35:14.409Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:36:58 +0000] \"GET /api/sign-up HTTP/1.1\" 404 150 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:36:58.969Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:11:37:07 +0000] \"POST /api/sign-up HTTP/1.1\" 404 151 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T11:37:07.918Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:12:47:39 +0000] \"POST /api/sign-up HTTP/1.1\" 404 151 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T12:47:39.518Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:12:47:39 +0000] \"POST /api/sign-up HTTP/1.1\" 404 151 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T12:47:39.590Z"}
+{"level":"info","message":"User registered successfully: 123@gmail.com","service":"acquisitions-api","timestamp":"2026-07-02T14:46:24.156Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:14:46:24 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 118 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T14:46:24.169Z"}
+{"level":"info","message":"User registered successfully: 123@gmail.com","service":"acquisitions-api","timestamp":"2026-07-02T14:54:17.269Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [02/Jul/2026:14:54:17 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 118 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-02T14:54:17.280Z"}
