@@ -144,6 +144,14 @@ const landingPage = `<!DOCTYPE html>
             text-decoration: none;
             transition: all 0.2s ease;
             font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
 
         .btn-primary {
@@ -152,7 +160,7 @@ const landingPage = `<!DOCTYPE html>
             box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             background: var(--primary-hover);
             transform: translateY(-1px);
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
@@ -164,7 +172,7 @@ const landingPage = `<!DOCTYPE html>
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .btn-secondary:hover {
+        .btn-secondary:hover:not(:disabled) {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-1px);
@@ -271,6 +279,107 @@ const landingPage = `<!DOCTYPE html>
             padding-left: 77px;
         }
 
+        /* Playground section styles */
+        .playground-section {
+            text-align: left;
+            margin-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 2rem;
+        }
+
+        .playground-section h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #ffffff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .playground-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #d1d5db;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px 14px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-select:focus, .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        }
+
+        .dynamic-fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .response-box {
+            margin-top: 1.5rem;
+            background: #050505;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1rem;
+            max-height: 250px;
+            overflow-y: auto;
+            display: none;
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 6px;
+        }
+
+        .response-status {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .response-status.status-2xx { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .response-status.status-error { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        .response-json {
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            color: #34d399;
+            text-align: left;
+        }
+
         footer {
             margin-top: 2.5rem;
             font-size: 0.75rem;
@@ -293,6 +402,7 @@ const landingPage = `<!DOCTYPE html>
             .desc { padding-left: 0; margin-top: 8px; }
             .endpoint-item { flex-direction: column; align-items: flex-start; gap: 8px; }
             .buttons { flex-direction: column; gap: 8px; }
+            .dynamic-fields { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -322,6 +432,7 @@ const landingPage = `<!DOCTYPE html>
             <a href="https://github.com/Prabhatvrma1/production-ready-node-api" target="_blank" class="btn btn-secondary">GitHub Repository</a>
         </div>
 
+        <!-- Endpoints Explorer -->
         <div class="endpoints-section">
             <h2>API Endpoint Explorer</h2>
             <div class="endpoints-list">
@@ -386,10 +497,198 @@ const landingPage = `<!DOCTYPE html>
             </div>
         </div>
 
+        <!-- Interactive Playground -->
+        <div class="playground-section">
+            <h2>Interactive API Playground</h2>
+            <div class="playground-card">
+                <div class="form-group">
+                    <label for="endpoint-select">Select Endpoint</label>
+                    <select id="endpoint-select" class="form-select">
+                        <option value="signup">POST /api/auth/sign-up (Register)</option>
+                        <option value="signin">POST /api/auth/sign-in (Login)</option>
+                        <option value="signout">POST /api/auth/sign-out (Logout)</option>
+                        <option value="getusers">GET /api/users (Get All Users)</option>
+                        <option value="getuserbyid">GET /api/users/:id (Get User by ID)</option>
+                        <option value="deleteuser">DELETE /api/users/:id (Delete User)</option>
+                    </select>
+                </div>
+
+                <div id="dynamic-fields" class="dynamic-fields">
+                    <!-- Fields injected dynamically -->
+                </div>
+
+                <button id="send-btn" class="btn btn-primary" style="width: 100%; justify-content: center;">Send Request</button>
+
+                <div id="response-box" class="response-box">
+                    <div class="response-header">
+                        <span>RESPONSE JSON</span>
+                        <span id="response-status" class="response-status">PENDING</span>
+                    </div>
+                    <pre id="response-json" class="response-json">Waiting for request...</pre>
+                </div>
+            </div>
+        </div>
+
         <footer>
             Built with ❤️ by <a href="https://github.com/Prabhatvrma1" target="_blank">Prabhat Verma</a>
         </footer>
     </div>
+
+    <!-- Playground Interactive Logic -->
+    <script>
+        const endpointSelect = document.getElementById('endpoint-select');
+        const dynamicFields = document.getElementById('dynamic-fields');
+        const responseBox = document.getElementById('response-box');
+        const responseJson = document.getElementById('response-json');
+        const responseStatus = document.getElementById('response-status');
+        const sendBtn = document.getElementById('send-btn');
+
+        const fieldsConfig = {
+            'signup': [
+                { name: 'name', label: 'Full Name', type: 'text', placeholder: 'John Doe', value: 'John Doe' },
+                { name: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com', value: 'john@example.com' },
+                { name: 'password', label: 'Password', type: 'password', placeholder: '••••••••', value: 'securepassword' },
+                { name: 'role', label: 'Role', type: 'select', options: ['user', 'admin'], value: 'user' }
+            ],
+            'signin': [
+                { name: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com', value: 'john@example.com' },
+                { name: 'password', label: 'Password', type: 'password', placeholder: '••••••••', value: 'securepassword' }
+            ],
+            'signout': [],
+            'getusers': [],
+            'getuserbyid': [
+                { name: 'id', label: 'User ID', type: 'text', placeholder: '1', value: '1' }
+            ],
+            'deleteuser': [
+                { name: 'id', label: 'User ID', type: 'text', placeholder: '1', value: '1' }
+            ]
+        };
+
+        function renderFields() {
+            const selected = endpointSelect.value;
+            const fields = fieldsConfig[selected] || [];
+            dynamicFields.innerHTML = '';
+
+            fields.forEach(field => {
+                const group = document.createElement('div');
+                group.className = 'form-group';
+                
+                const label = document.createElement('label');
+                label.textContent = field.label;
+                group.appendChild(label);
+
+                if (field.type === 'select') {
+                    const select = document.createElement('select');
+                    select.className = 'form-select';
+                    select.name = field.name;
+                    field.options.forEach(opt => {
+                        const o = document.createElement('option');
+                        o.value = opt;
+                        o.textContent = opt;
+                        if (opt === field.value) o.selected = true;
+                        select.appendChild(o);
+                    });
+                    group.appendChild(select);
+                } else {
+                    const input = document.createElement('input');
+                    input.className = 'form-input';
+                    input.type = field.type;
+                    input.name = field.name;
+                    input.placeholder = field.placeholder;
+                    input.value = field.value || '';
+                    group.appendChild(input);
+                }
+                dynamicFields.appendChild(group);
+            });
+
+            if (fields.length === 0) {
+                dynamicFields.style.display = 'none';
+            } else {
+                dynamicFields.style.display = 'grid';
+            }
+        }
+
+        endpointSelect.addEventListener('change', renderFields);
+        renderFields();
+
+        sendBtn.addEventListener('click', async () => {
+            const selected = endpointSelect.value;
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Sending...';
+            responseBox.style.display = 'block';
+            responseJson.textContent = 'Waiting for response...';
+            responseStatus.textContent = 'PENDING';
+            responseStatus.className = 'response-status';
+
+            let url = '';
+            let method = 'GET';
+            let body = null;
+
+            const inputs = dynamicFields.querySelectorAll('input, select');
+            const data = {};
+            inputs.forEach(input => {
+                data[input.name] = input.value;
+            });
+
+            switch (selected) {
+                case 'signup':
+                    url = '/api/auth/sign-up';
+                    method = 'POST';
+                    body = JSON.stringify(data);
+                    break;
+                case 'signin':
+                    url = '/api/auth/sign-in';
+                    method = 'POST';
+                    body = JSON.stringify(data);
+                    break;
+                case 'signout':
+                    url = '/api/auth/sign-out';
+                    method = 'POST';
+                    break;
+                case 'getusers':
+                    url = '/api/users';
+                    method = 'GET';
+                    break;
+                case 'getuserbyid':
+                    url = \`/api/users/\${data.id}\`;
+                    method = 'GET';
+                    break;
+                case 'deleteuser':
+                    url = \`/api/users/\${data.id}\`;
+                    method = 'DELETE';
+                    break;
+            }
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body
+                });
+
+                const json = await res.json();
+                responseStatus.textContent = \`\${res.status} \${res.statusText}\`;
+                if (res.ok) {
+                    responseStatus.className = 'response-status status-2xx';
+                    responseJson.style.color = '#34d399';
+                } else {
+                    responseStatus.className = 'response-status status-error';
+                    responseJson.style.color = '#f87171';
+                }
+                responseJson.textContent = JSON.stringify(json, null, 2);
+            } catch (err) {
+                responseStatus.textContent = 'ERROR';
+                responseStatus.className = 'response-status status-error';
+                responseJson.style.color = '#f87171';
+                responseJson.textContent = \`Network error: \${err.message}\`;
+            } finally {
+                sendBtn.disabled = false;
+                sendBtn.textContent = 'Send Request';
+            }
+        });
+    </script>
 </body>
 </html>`;
 
