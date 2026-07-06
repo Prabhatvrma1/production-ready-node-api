@@ -1,0 +1,2 @@
+# Force LF line endings for all text files (ensures CI on Linux matches local)
+* text=auto eol=lf
