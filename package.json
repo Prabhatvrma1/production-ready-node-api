@@ -57,12 +57,12 @@
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
     "winston": "^3.19.0",
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "drizzle-kit": "^0.31.10"
   },
   "devDependencies": {
     "@eslint/js": "^8.57.1",
     "@jest/globals": "^30.4.1",
-    "drizzle-kit": "^0.31.10",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.6",
