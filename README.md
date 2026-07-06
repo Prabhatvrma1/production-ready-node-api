@@ -5,6 +5,7 @@ A production-ready RESTful API built with **Express.js** for managing user authe
 [![Lint & Format](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/lint-and-format.yml/badge.svg)](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/lint-and-format.yml)
 [![Tests](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/tests.yml/badge.svg)](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/tests.yml)
 [![Docker Build & Push](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/docker-build-and-push.yml/badge.svg)](https://github.com/Prabhatvrma1/aquisitions/actions/workflows/docker-build-and-push.yml)
+[![Docker Hub](https://img.shields.io/docker/v/prabhatsoni16/aquisitions?label=Docker%20Hub)](https://hub.docker.com/r/prabhatsoni16/aquisitions)
 
 ---
 
@@ -295,7 +296,7 @@ Triggered on push/PR to `main` and `staging`.
 Triggered on push to `main` or manually via `workflow_dispatch`.
 
 - Builds a multi-platform image (`linux/amd64`, `linux/arm64`) targeting the `production` Dockerfile stage
-- Pushes to Docker Hub with 4 tags:
+- Pushes to Docker Hub at **`prabhatsoni16/aquisitions`** with 4 tags:
   - `latest`
   - branch name (e.g. `main`)
   - commit SHA (e.g. `sha-a1b2c3d`)
@@ -344,7 +345,7 @@ In non-production environments, logs are also printed to the console with color 
 | Secret              | Used by                  | Description                              |
 | ------------------- | ------------------------ | ---------------------------------------- |
 | `DOCKER_USERNAME`   | docker-build-and-push    | Docker Hub username                      |
-| `DOCKER_PASSWORD`   | docker-build-and-push    | Docker Hub password / access token       |
+| `DOCKER_PASSWORD`   | docker-build-and-push    | Docker Hub password / access token for `prabhatsoni16` |
 | `TEST_DATABASE_URL` | tests                    | PostgreSQL URL for test environment      |
 | `JWT_SECRET`        | tests                    | Secret key for JWT in tests              |
 | `ARCJET_KEY`        | tests                    | Arcjet API key for security middleware   |
