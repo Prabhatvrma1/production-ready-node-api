@@ -20,6 +20,8 @@
     "format": "prettier --write .",
     "lint:fix": "eslint . --fix",
     "format-check": "prettier --check .",
+    "format:check": "prettier --check .",
+
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "db:generate": "drizzle-kit generate",

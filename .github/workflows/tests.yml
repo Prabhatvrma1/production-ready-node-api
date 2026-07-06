@@ -1,0 +1,75 @@
+name: Tests
+
+on:
+  push:
+    branches: [main, staging]
+  pull_request:
+    branches: [main, staging]
+
+jobs:
+  test:
+    name: Run Tests & Coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        env:
+          NODE_ENV: test
+          NODE_OPTIONS: --experimental-vm-modules
+          DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          ARCJET_KEY: ${{ secrets.ARCJET_KEY }}
+        run: npm test -- --coverage
+        continue-on-error: true
+        id: run_tests
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+
+      - name: Generate job summary
+        if: always()
+        run: |
+          if [ "${{ steps.run_tests.outcome }}" == "success" ]; then
+            echo "## ✅ Tests Passed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "All tests passed successfully." >> $GITHUB_STEP_SUMMARY
+            if [ -f coverage/coverage-summary.json ]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "### Coverage Summary" >> $GITHUB_STEP_SUMMARY
+              echo "| Category | % Covered |" >> $GITHUB_STEP_SUMMARY
+              echo "| -------- | --------- |" >> $GITHUB_STEP_SUMMARY
+              node -e "
+                const c = require('./coverage/coverage-summary.json').total;
+                console.log('| Statements | ' + c.statements.pct + '% |');
+                console.log('| Branches   | ' + c.branches.pct + '% |');
+                console.log('| Functions  | ' + c.functions.pct + '% |');
+                console.log('| Lines      | ' + c.lines.pct + '% |');
+              " >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "## ❌ Tests Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "One or more tests failed. Check the test logs above for details." >> $GITHUB_STEP_SUMMARY
+            echo "::error::Tests failed. Review test output for details."
+          fi
+
+      - name: Fail job if tests failed
+        if: steps.run_tests.outcome == 'failure'
+        run: exit 1
