@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "imports": {
-    "#controller": "./src/controller/*.js",
-    "#validations": "./src/validations/*.js",
-    "#config": "./src/config/*.js",
-    "#models": "./src/models/*.js",
-    "#middleware": "./src/middleware/*.js",
-    "#routes": "./src/routes/*.js",
-    "#services": "./src/services/*.js",
-    "#utils": "./src/utils/*.js"
+    "#controller/*": "./src/controller/*",
+    "#validations/*": "./src/validations/*",
+    "#config/*": "./src/config/*",
+    "#models/*": "./src/models/*",
+    "#middleware/*": "./src/middleware/*",
+    "#routes/*": "./src/routes/*",
+    "#services/*": "./src/services/*",
+    "#utils/*": "./src/utils/*",
+    "#src/*": "./src/*"
   },
   "scripts": {
     "start": "node src/index.js",
@@ -67,6 +68,7 @@
     "globals": "^17.7.0",
     "jest": "^30.4.2",
     "pg": "^8.22.0",
-    "prettier": "^3.9.4"
+    "prettier": "^3.9.4",
+    "supertest": "^7.2.2"
   }
 }

@@ -132,3 +132,9 @@
 {"level":"info","message":"user 12345689@gmail.com created sucessfullt","service":"acquisitions-api","timestamp":"2026-07-05T18:20:03.045Z"}
 {"level":"info","message":"User registered successfully: 12345689@gmail.com","service":"acquisitions-api","timestamp":"2026-07-05T18:20:03.051Z"}
 {"level":"info","message":"::ffff:172.19.0.1 - - [05/Jul/2026:18:20:03 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 123 \"-\" \"node\"","service":"acquisitions-api","timestamp":"2026-07-05T18:20:03.053Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [06/Jul/2026:11:27:02 +0000] \"GET /health HTTP/1.1\" 200 73 \"-\" \"-\"","service":"acquisitions-api","timestamp":"2026-07-06T11:27:02.769Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [06/Jul/2026:11:27:02 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"-\"","service":"acquisitions-api","timestamp":"2026-07-06T11:27:02.813Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [06/Jul/2026:11:27:02 +0000] \"GET /nonexsistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"acquisitions-api","timestamp":"2026-07-06T11:27:02.839Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [06/Jul/2026:11:27:18 +0000] \"GET /health HTTP/1.1\" 200 73 \"-\" \"-\"","service":"acquisitions-api","timestamp":"2026-07-06T11:27:18.834Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [06/Jul/2026:11:27:18 +0000] \"GET /api HTTP/1.1\" 200 42 \"-\" \"-\"","service":"acquisitions-api","timestamp":"2026-07-06T11:27:18.885Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [06/Jul/2026:11:27:18 +0000] \"GET /nonexsistent HTTP/1.1\" 404 27 \"-\" \"-\"","service":"acquisitions-api","timestamp":"2026-07-06T11:27:18.902Z"}
