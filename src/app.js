@@ -7,10 +7,21 @@ import cookieParser from 'cookie-parser';
 import authRoutes from '#routes/auth.routes.js';
 import securityMiddleware from '#middleware/security.middleware.js';
 import usersRoutes from '#routes/users.routes.js';
+import landingPage from '#utils/landingPage.js';
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:"]
+    }
+  }
+}));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,7 +37,7 @@ app.use(securityMiddleware);
 
 app.get('/', (req, res) => {
   logger.info('Hello from Acquisitions!');
-  res.status(200).send('Hello from Acquisitions!');
+  res.status(200).send(landingPage);
 });
 
 app.get('/health', (req, res) => {
